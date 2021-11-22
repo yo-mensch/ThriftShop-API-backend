@@ -25,7 +25,7 @@ public class ProductController {
         return productService.findAll();
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/author/{authorID}")
     public List<ProductResponse> getProductsByAuthorId(@PathVariable String authorID){
         return productService.findProductsByAuthorId(Integer.parseInt(authorID));
     }
@@ -45,6 +45,11 @@ public class ProductController {
     ResponseEntity<HttpStatus> updateProduct(@RequestBody ProductRequest productRequest, @PathVariable String id){
         productService.updateProduct(productRequest, Integer.parseInt(id));
         return new ResponseEntity<>(HttpStatus.valueOf(204));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable String id){
+        productService.deleteProduct(Integer.parseInt(id));
     }
 }
 

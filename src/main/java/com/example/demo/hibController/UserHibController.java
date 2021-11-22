@@ -112,9 +112,9 @@ public class UserHibController {
         return null;
     }
 
-    public User getUserByUsername(String username) {
+    public User getUserById(int id) {
         for(User user: getUserList()){
-            if(user.getUsername().equals(username)) return user;
+            if(user.getId() == id) return user;
         }
         return null;
     }

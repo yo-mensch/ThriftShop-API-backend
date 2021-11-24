@@ -21,5 +21,4 @@ public class ProductResponse {
         this.price = product.getPrice();
     }
 }
-// /users/{id}/products
 

@@ -70,6 +70,15 @@ public class ShoppingCartHibController {
         return null;
     }
 
+    public ShoppingCart getCartById(int id){
+        for(ShoppingCart shoppingCart: getShoppingCartsList()){
+            if(shoppingCart.getId() == id){
+                return shoppingCart;
+            }
+        }
+        return null;
+    }
+
     public void updateShoppingCart(ShoppingCart shoppingCart){
         EntityManager entityManager = null;
 
@@ -81,6 +90,30 @@ public class ShoppingCartHibController {
             entityManager.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
+        }
+    }
+
+    public void deleteShoppingCart(int id){
+        EntityManager entityManager = null;
+
+        try{
+            entityManager = getEntityManager();
+            entityManager.getTransaction().begin();
+            ShoppingCart shoppingCart = null;
+            try{
+                shoppingCart = entityManager.getReference(ShoppingCart.class, id);
+                shoppingCart.getProducts().clear();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            entityManager.remove(shoppingCart);
+            entityManager.getTransaction().commit();
+        } catch (Exception e){
+            e.printStackTrace();
         } finally {
             if (entityManager != null) {
                 entityManager.close();

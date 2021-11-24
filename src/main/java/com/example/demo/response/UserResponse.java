@@ -15,8 +15,6 @@ public class UserResponse {
     private String email;
     private float balance;
 
-    // /users/{id}/orders
-
     public UserResponse(User user){
         this.id = user.getId();
         this.username = user.getUsername();

@@ -25,11 +25,6 @@ public class ProductController {
         return productService.findAll();
     }
 
-    @GetMapping("/author/{authorID}")
-    public List<ProductResponse> getProductsByAuthorId(@PathVariable String authorID){
-        return productService.findProductsByAuthorId(Integer.parseInt(authorID));
-    }
-
     @GetMapping("/{id}")
     public ProductResponse findProductById(@PathVariable String id){
         return productService.findProductById(Integer.parseInt(id));

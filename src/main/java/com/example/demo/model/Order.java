@@ -25,11 +25,11 @@ public class Order {
     @ManyToOne
     private User buyer;
 
-    public Order(List<Product> products, User buyer) {
+    public Order(List<Product> products, User buyer, String status) {
         this.id = new Random(System.currentTimeMillis()).nextInt();
         this.products = products;
         this.payment = null;
-        this.orderStatus = OrderStatus.PROCESSING;
+        this.orderStatus = OrderStatus.valueOf(status);
         this.buyer = buyer;
     }
 

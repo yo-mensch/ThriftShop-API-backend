@@ -21,10 +21,10 @@ public class Payment {
     @OneToOne
     private Order order;
 
-    public Payment(float amount, User user, Order order) {
+    public Payment(float amount,String status, User user, Order order) {
         this.id = new Random(System.currentTimeMillis()).nextInt();
         this.amount = amount;
-        this.paymentStatus = PaymentStatus.PROCESSING;
+        this.paymentStatus = PaymentStatus.valueOf(status);
         this.user = user;
         this.order = order;
     }

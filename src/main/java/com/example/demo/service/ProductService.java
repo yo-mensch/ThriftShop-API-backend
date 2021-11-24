@@ -51,6 +51,7 @@ public class ProductService {
     public void createProduct(final ProductRequest productRequest, int authorID){
         User author = userHibController.getUserById(authorID);
         Product product = new Product(productRequest.getName(), productRequest.getDescription(), productRequest.getPrice(), author);
+        productHibController.createProduct(product);
     }
 
     public void updateProduct(ProductRequest productUpdated, int id) {

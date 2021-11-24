@@ -15,10 +15,7 @@ public class UserResponse {
     private String email;
     private float balance;
 
-    // endpoints for other info:
     // /users/{id}/orders
-    // /users/{id}/address
-    // /users/{id}/shoppingCart
 
     public UserResponse(User user){
         this.id = user.getId();

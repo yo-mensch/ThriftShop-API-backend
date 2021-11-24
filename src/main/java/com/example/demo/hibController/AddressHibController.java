@@ -110,4 +110,11 @@ public class AddressHibController {
         }
         return null;
     }
+
+    public Address getAddressById(int id) {
+        for(Address address: getAddressList()){
+            if(address.getId()==id) return address;
+        }
+        return null;
+    }
 }

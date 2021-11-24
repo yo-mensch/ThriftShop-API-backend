@@ -1,8 +1,8 @@
 package com.example.demo.restController;
 
 import com.example.demo.request.UserRequest;
-import com.example.demo.response.UserResponse;
-import com.example.demo.service.UserService;
+import com.example.demo.response.*;
+import com.example.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,18 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
+    private final ProductService productService;
+    private final AddressService addressService;
+    private final OrderService orderService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, ShoppingCartService shoppingCartService, ProductService productService, AddressService addressService, OrderService orderService) {
         this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
+        this.productService = productService;
+        this.addressService = addressService;
+        this.orderService = orderService;
     }
 
     @GetMapping
@@ -28,6 +36,26 @@ public class UserController {
     @GetMapping("/{id}")
     public UserResponse getUserById(@PathVariable String id){
         return userService.findUserById(Integer.parseInt(id));
+    }
+
+    @GetMapping("/{id}/shoppingCart")
+    public ShoppingCartResponse getShoppingCartByUserId(@PathVariable String id){
+        return shoppingCartService.findCartByUserId(Integer.parseInt(id));
+    }
+
+    @GetMapping("/{id}/products")
+    public List<ProductResponse> getProductsByAuthorId(@PathVariable String id){
+        return productService.findProductsByAuthorId(Integer.parseInt(id));
+    }
+
+    @GetMapping("/{id}/address")
+    public AddressResponse getAddressByUserId(@PathVariable String id){
+        return addressService.findAddressByUserId(Integer.parseInt(id));
+    }
+
+    @GetMapping("/{id}/orders")
+    public List<OrderResponse> getOrdersByUserId(@PathVariable String id){
+        return orderService.findOrdersByUserId(Integer.parseInt(id));
     }
 
     @PostMapping
